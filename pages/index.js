@@ -3,18 +3,26 @@ import { useState } from "react";
 import styles from "./index.module.css";
 
 export default function Home() {
-  const [animalInput, setAnimalInput] = useState("");
-  const [result, setResult] = useState();
+  const [nameInput, setNameInput] = useState("");
+  const [descriptionInput, setDescriptionInput] = useState("");
+  const [contactInfoInput, setContactInfoInput] = useState("");
+  const [result, setResult] = useState("");
 
   async function onSubmit(event) {
     event.preventDefault();
     try {
+      const person = {
+        name: nameInput,
+        description: descriptionInput,
+        contactInfo: contactInfoInput,
+      };
+      console.log(JSON.stringify({ person }));
       const response = await fetch("/api/generate", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ animal: animalInput }),
+        body: JSON.stringify({ person : ("".concat(nameInput, descriptionInput)) }),
       });
 
       const data = await response.json();
@@ -23,8 +31,10 @@ export default function Home() {
       }
 
       setResult(data.result);
-      setAnimalInput("");
-    } catch(error) {
+      setNameInput("");
+      setDescriptionInput("");
+      setContactInfoInput("");
+    } catch (error) {
       // Consider implementing your own error handling logic here
       console.error(error);
       alert(error.message);
@@ -39,17 +49,31 @@ export default function Home() {
       </Head>
 
       <main className={styles.main}>
-        <img src="/dog.png" className={styles.icon} />
-        <h3>Name my pet</h3>
+        <img src="/friends.png" className={styles.icon} />
+        <h3>Create a person</h3>
         <form onSubmit={onSubmit}>
           <input
             type="text"
-            name="animal"
-            placeholder="Enter an animal"
-            value={animalInput}
-            onChange={(e) => setAnimalInput(e.target.value)}
+            name="name"
+            placeholder="Enter a name"
+            value={nameInput}
+            onChange={(e) => setNameInput(e.target.value)}
           />
-          <input type="submit" value="Generate names" />
+          <input
+            type="text"
+            name="description"
+            placeholder="Enter a description"
+            value={descriptionInput}
+            onChange={(e) => setDescriptionInput(e.target.value)}
+          />
+          <input
+            type="text"
+            name="contactInfo"
+            placeholder="Enter contact info"
+            value={contactInfoInput}
+            onChange={(e) => setContactInfoInput(e.target.value)}
+          />
+          <input type="submit" value="Generate message" />
         </form>
         <div className={styles.result}>{result}</div>
       </main>
