@@ -6,8 +6,11 @@ export default function Home() {
   const [nameInput, setNameInput] = useState("");
   const [descriptionInput, setDescriptionInput] = useState("");
   const [contactInfoInput, setContactInfoInput] = useState("");
-  const [result, setResult] = useState("");
-
+  const [message, setMessage] = useState("");
+  const tempRes = "Hey Jesse! I hope you're doing well. It's been a while since we last talked and I wanted to check in with you and see how you're doing. I know that school and learning computer science can be tough, but I want you to know that I'm always here for you if you need someone to talk to. On a lighter note, don't forget to show yourself some love and buy a few flowers or something cute for your favorite chihuahas! Love you always, [Your Name]"
+  const handleSend = (event) => {
+    alert('button clicked')
+  }
   async function onSubmit(event) {
     event.preventDefault();
     try {
@@ -30,7 +33,7 @@ export default function Home() {
         throw data.error || new Error(`Request failed with status ${response.status}`);
       }
 
-      setResult(data.result);
+      setMessage(data.result);
       setNameInput("");
       setDescriptionInput("");
       setContactInfoInput("");
@@ -75,7 +78,8 @@ export default function Home() {
           />
           <input type="submit" value="Generate message" />
         </form>
-        <div className={styles.result}>{result}</div>
+        <div className={styles.result}>{tempRes}</div>
+        <button type = "submit" onClick={handleSend}>Send Message</button>
       </main>
     </div>
   );

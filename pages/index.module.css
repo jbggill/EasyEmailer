@@ -52,7 +52,8 @@
   color: #8e8ea0;
   opacity: 1;
 }
-.main input[type="submit"] {
+.main input[type="submit"],
+.main button[type="submit"] {
   padding: 12px 0;
   color: #fff;
   background-color: #10a37f;
@@ -60,8 +61,13 @@
   border-radius: 4px;
   text-align: center;
   cursor: pointer;
+  width: 100%;
 }
 .main .result {
   font-weight: bold;
   margin-top: 40px;
+  border: 1px solid #10a37f;
+  padding: 10px;
+  border-radius: 8px;
 }
+
