@@ -33,7 +33,6 @@ export default function PersonForm({ setMessage }) {
       setDescriptionInput("");
       setContactInfoInput("");
     } catch (error) {
-      // Consider implementing your own error handling logic here
       console.error(error);
       alert(error.message);
     }
