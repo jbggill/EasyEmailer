@@ -30,11 +30,10 @@ export default async function (req, res) {
       model: "text-davinci-003",
       prompt: generatePrompt(personDescription),
       temperature: 1,
-      max_tokens: 200, // Adjust the value as per your requirement
+      max_tokens: 200, 
     });
     res.status(200).json({ result: completion.data.choices[0].text });
   } catch(error) {
-    // Consider adjusting the error handling logic for your use case
     if (error.response) {
       console.error(error.response.status, error.response.data);
       res.status(error.response.status).json(error.response.data);
